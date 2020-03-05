@@ -4,6 +4,7 @@ import math
 import matplotlib.pyplot as plt
 import random
 import numpy as np
+import torch.nn.functional as F
 
 x = [i for i in range(1000)]
 
@@ -19,7 +20,7 @@ def random_data_generator():
         x_temp.append(x[i + index_start])
     x__ = x_temp.copy()
     for i in range(100):
-        y_temp.append(((math.sin(x_temp[-1] + 0.1 * i)) * 30) + 5 * np.random.random(1))
+        y_temp.append(((math.sin(x_temp[-1] + 0.1 * i))))
 
     for i in range(100):
         x_temp[i] = math.sin(x_temp[i])
@@ -36,27 +37,31 @@ def random_data_generator():
 class lstm_net(nn.Module):
     def __init__(self):
         super(lstm_net, self).__init__()
-        self.lstm_layer1 = nn.LSTM(100, 100)
+        self.layer_in = nn.Linear(100, 100)
+        self.lstm_layer1 = nn.LSTM(100, 100,2)
         self.layer_output = nn.Linear(100, 100)
 
         # INITIALIZING OUR INITIAL HIDDEN VALUES (LONG TERM MEMORY VALUES)
 
-        self.hidden_initialize = (torch.zeros((1, 1, 100)), torch.zeros((1, 1, 100)))
+        self.hidden_initialize = (torch.zeros((2, 1, 100)), torch.zeros((2, 1, 100)))
 
     def forward(self, x):
+        x = self.layer_in(x)
         x, hidden = self.lstm_layer1(x, self.hidden_initialize)
+        x = F.relu(x)
         x = self.layer_output(x)
+        
         return x
 
 
 my_model = lstm_net()
 loss_function = nn.MSELoss()
-optimizer = torch.optim.Adam(my_model.parameters(), lr=0.001)
+optimizer = torch.optim.Adam(my_model.parameters(), lr=0.1)
 loss_history = []
 
 # TRAINNING LOOP
 
-for i in range(2000):
+for i in range(100):
     x_, y_, _ = random_data_generator()
 
     optimizer.zero_grad()
