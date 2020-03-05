@@ -56,12 +56,12 @@ class lstm_net(nn.Module):
 
 my_model = lstm_net()
 loss_function = nn.MSELoss()
-optimizer = torch.optim.Adam(my_model.parameters(), lr=0.1)
+optimizer = torch.optim.Adam(my_model.parameters(), lr=0.01)
 loss_history = []
 
 # TRAINNING LOOP
 
-for i in range(100):
+for i in range(200):
     x_, y_, _ = random_data_generator()
 
     optimizer.zero_grad()
