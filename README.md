@@ -2,4 +2,4 @@
 
 Predicting time series related problems with LSTM in pytorch.
 
-Here i am prediciting the sin(x) graph values.
+Here sin(x) graph is the target function.
