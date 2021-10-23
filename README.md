@@ -1,4 +1,4 @@
-# Time_Series_Prediciton
+# Time-Series-Prediciton
 
 Predicting time series related problems with LSTM in pytorch.
 
