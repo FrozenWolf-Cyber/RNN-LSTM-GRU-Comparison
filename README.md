@@ -1,6 +1,6 @@
 # RNN-LSTM-GRU-Comparison 
 
-We are trying compare train losses, training time and model convergence for RNN , LSTM and GRU models using sin(x) graph in CPU and GPU
+We are trying to compare train losses, training time, and model convergence for RNN , LSTM, and GRU models using sin(x) graph in CPU and GPU
 
 ## Result :
 ### RNN :
@@ -34,6 +34,7 @@ We are trying compare train losses, training time and model convergence for RNN 
 ![epoch45](https://user-images.githubusercontent.com/57902078/140617693-f7aa5511-25ac-4bca-ae6d-ca9977d1313a.png)
 ![epoch50](https://user-images.githubusercontent.com/57902078/140617694-79b30aa2-d1b6-4a3c-b5c6-86019323ffba.png)
 
-
+## Conclusion :
+From the results, we can conclude that it's easier to tweak RNN and GRU than LSTM due to the larger number of gates. It is clear that GRU is much faster than LSTM and GRU during training due to its very low number of trainable parameters. It is also clear that LSTM takes a longer time to converge than the other two models.
 
 
